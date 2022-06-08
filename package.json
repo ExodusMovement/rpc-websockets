@@ -47,6 +47,9 @@
     "typescript": "^4.5.5"
   },
   "browser": "./dist/index.browser.js",
+  "browserslist": [
+    "Chrome 96"
+  ],
   "keywords": [
     "json",
     "rpc",
