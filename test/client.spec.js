@@ -6,7 +6,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const should = require("chai").should()
 const expect = require("chai").expect
-const WebSocketServer = require("../dist").Server
+const WebSocketServer = require("rpc-websockets").Server
 
 const WebSocket = require("../dist").Client
 const SERVER_HOST = "localhost"

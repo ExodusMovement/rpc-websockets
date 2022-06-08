@@ -32,5 +32,3 @@ export class Client extends CommonClient
         )
     }
 }
-
-export {default as Server} from "./lib/server"
