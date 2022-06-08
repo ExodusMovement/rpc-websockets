@@ -1,5 +1,5 @@
 {
-  "name": "rpc-websockets",
+  "name": "@exodus/rpc-websockets",
   "version": "7.5.0",
   "description": "JSON-RPC 2.0 implementation over WebSockets for Node.js",
   "main": "./dist/index.js",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elpheria/rpc-websockets.git"
+    "url": "git+https://github.com/ExodusMovement/rpc-websockets.git"
   },
   "dependencies": {
     "eventemitter3": "^4.0.7",
@@ -64,9 +64,9 @@
   "author": "Elpheria",
   "license": "LGPL-3.0-only",
   "bugs": {
-    "url": "https://github.com/elpheria/rpc-websockets/issues"
+    "url": "https://github.com/ExodusMovement/rpc-websockets/issues"
   },
-  "homepage": "https://github.com/elpheria/rpc-websockets#readme",
+  "homepage": "https://github.com/ExodusMovement/rpc-websockets#readme",
   "funding": {
     "type": "paypal",
     "url": "https://paypal.me/kozjak"
