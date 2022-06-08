@@ -16,3 +16,7 @@ node_modules/
 .idea/
 
 .vscode
+
+# Build
+dist
+build-ts
