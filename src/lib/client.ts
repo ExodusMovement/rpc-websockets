@@ -24,9 +24,7 @@ interface IQueueElement {
     timeout?: ReturnType<typeof setTimeout>;
 }
 
-export interface IQueue {
-    [x: number]: IQueueElement;
-}
+export interface IQueue extends Map<number, IQueueElement> {}
 
 export interface IWSRequestParams {
     [x: string]: any;
@@ -76,7 +74,7 @@ export default class CommonClient extends EventEmitter
 
         this.webSocketFactory = webSocketFactory
 
-        this.queue = {}
+        this.queue = new Map()
         this.rpc_id = 0
 
         this.address = address
@@ -159,13 +157,13 @@ export default class CommonClient extends EventEmitter
                 if (error)
                     return reject(error)
 
-                this.queue[rpc_id] = { promise: [resolve, reject] }
+                this.queue.set(rpc_id, { promise: [resolve, reject] })
 
                 if (timeout)
                 {
-                    this.queue[rpc_id].timeout = setTimeout(() =>
+                    this.queue.get(rpc_id).timeout = setTimeout(() =>
                     {
-                        delete this.queue[rpc_id]
+                        this.queue.delete(rpc_id)
                         reject(new Error("reply timeout"))
                     }, timeout)
                 }
@@ -332,7 +330,7 @@ export default class CommonClient extends EventEmitter
                 return Promise.resolve().then(() => { this.emit.apply(this, args) })
             }
 
-            if (!this.queue[message.id])
+            if (!this.queue.has(message.id))
             {
                 // general JSON RPC 2.0 events
                 if (message.method && message.params)
@@ -349,20 +347,20 @@ export default class CommonClient extends EventEmitter
 
             // reject early since server's response is invalid
             if ("error" in message === "result" in message)
-                this.queue[message.id].promise[1](new Error(
+                this.queue.get(message.id).promise[1](new Error(
                     "Server response malformed. Response must include either \"result\"" +
                     " or \"error\", but not both."
                 ))
 
-            if (this.queue[message.id].timeout)
-                clearTimeout(this.queue[message.id].timeout)
+            if (this.queue.get(message.id).timeout)
+                clearTimeout(this.queue.get(message.id).timeout)
 
             if (message.error)
-                this.queue[message.id].promise[1](message.error)
+                this.queue.get(message.id).promise[1](message.error)
             else
-                this.queue[message.id].promise[0](message.result)
+                this.queue.get(message.id).promise[0](message.result)
 
-            delete this.queue[message.id]
+            this.queue.delete(message.id)
         })
 
         this.socket.addEventListener("error", (error) => this.emit("error", error))
