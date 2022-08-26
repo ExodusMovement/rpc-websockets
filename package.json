@@ -25,10 +25,6 @@
     "eventemitter3": "^4.0.7",
     "ws": "^7.4.5"
   },
-  "optionalDependencies": {
-    "bufferutil": "^4.0.1",
-    "utf-8-validate": "^5.0.2"
-  },
   "devDependencies": {
     "@babel/cli": "^7.17.0",
     "@babel/core": "^7.17.2",
