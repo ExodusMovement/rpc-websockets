@@ -1,6 +1,6 @@
 {
   "name": "@exodus/rpc-websockets",
-  "version": "7.5.0-exodus.2",
+  "version": "7.5.0-exodus.3",
   "description": "JSON-RPC 2.0 implementation over WebSockets for Node.js",
   "main": "./dist/index.js",
   "browser": "./dist/index.browser.js",
